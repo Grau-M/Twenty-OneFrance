@@ -9,17 +9,14 @@ package ca.sheridancollege.project;
  *
  * @author chukwukeshiem
  */
-public class Card {
-    private String rank;
-    private String suit;
+public class Dealer {
+    private Hand hand;
 
-    public Card(String rank, String suit) {
-        this.rank = rank;
-        this.suit = suit;
+    public Dealer() {
+        this.hand = new Hand();
     }
 
-    @Override
-    public String toString() {
-        return rank + " of " + suit; // Format the card as "Rank of Suit"
+    public Hand getHand() {
+        return hand;
     }
 }
