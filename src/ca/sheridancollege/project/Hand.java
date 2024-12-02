@@ -71,6 +71,10 @@ public class Hand {
         return calculateHandValue() > 21;
     }
     
+    public void clear() {
+        cards.clear(); // Clear the list of cards in the hand
+    }
+    
     @Override
     public String toString() {
         return displayHand(); // Use the custom display method in toString

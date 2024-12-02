@@ -8,8 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
- * @edited Marcus Grau
- * @edited Tam Nguyen
+ * @edited Marcus Grau, Tam Nguyen
  */
 public class Player {
     private String name;
@@ -53,11 +52,11 @@ public class Player {
     }
     
     public void winBet(double betAmount) {
-        balance += betAmount * 2; // Double the bet on a win
+        balance += betAmount; // Add the wager back to the player's balance
     }
 
     public void loseBet(double betAmount) {
-        // Balance is already decreased when placing the bet
+        balance -= betAmount; // Deduct the wager if the player loses
     }
 
     // Add balance (e.g., after winning)
