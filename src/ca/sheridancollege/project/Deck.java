@@ -44,4 +44,9 @@ public class Deck {
     public Card dealCard() {
         return cards.remove(cards.size() - 1); // Remove from the end of the deck
     }
+    
+    // Error handling when the deck is empty
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
 }
