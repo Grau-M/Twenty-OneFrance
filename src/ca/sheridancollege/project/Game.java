@@ -75,6 +75,12 @@ public class Game {
             System.out.println("Your wager: $" + wager + "\n");
             System.out.println("Your hand: " + player.getHand());
             System.out.println("Dealer's hand: " + dealer.getHand().getCards().get(0) + " [Hidden]");
+            
+            int playerHandValue = player.getHand().calculateHandValue();
+            int dealerHandValue = dealer.getHand().calculateHandValue();
+
+            System.out.println("Player's hand value: " + playerHandValue);
+            System.out.println("Dealer's hand value: " + dealerHandValue);
 
             
         } else {

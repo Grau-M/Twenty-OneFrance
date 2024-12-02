@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
+ * @edited Marcus Grau
  * @edited Tam Nguyen
  */
 public class Player {

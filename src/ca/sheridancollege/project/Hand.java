@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
+ * @edited Marcus Grau
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,32 @@ public class Hand {
         }
         return handString.toString();
     }
-
+    
+    public int calculateHandValue() {
+        int handValue = 0;
+        int aceCount = 0;
+        
+        for (Card card : cards) {
+            int cardValue = card.getValue();
+            if(cardValue == 1) { // This means the card is an ace
+                aceCount++;
+                handValue += 11;                
+            } else if (cardValue > 10) { // Face value cards
+                handValue += 10;
+            } else {
+                handValue += cardValue;
+            }
+        }
+        
+        // Adjust the ace value if needed
+        while (handValue > 21 && aceCount > 0) {
+            handValue -= 10;
+            aceCount--;
+        }
+        
+        return handValue;
+    }
+    
     @Override
     public String toString() {
         return displayHand(); // Use the custom display method in toString
