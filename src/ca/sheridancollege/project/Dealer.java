@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
+ * @edited Tam Nguyen
  */
 public class Dealer {
     private Hand hand;
@@ -18,5 +19,14 @@ public class Dealer {
 
     public Hand getHand() {
         return hand;
+    }
+    
+    // Hit method
+    public void hit(Deck deck) {
+        // Use drawCard() to take from the top of the deck
+        Card drawnCard = deck.drawCard();
+        hand.addCard(drawnCard);
+        System.out.println("Dealer hits and draws: " + drawnCard);
+        System.out.println("Dealer's hand: " + hand.displayHand());
     }
 }

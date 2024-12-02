@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
+ * @edited Tam Nguyen
  */
 public class Player {
     private String name;
@@ -48,5 +49,14 @@ public class Player {
     // Add balance (e.g., after winning)
     public void addBalance(double amount) {
         balance += amount;
+    }
+    
+    // Hit method to draw a card
+    public void hit(Deck deck) {
+        // Use drawCard() to take from the top of the deck
+        Card drawnCard = deck.drawCard();
+        hand.addCard(drawnCard);
+        System.out.println(name + " hits and draws: " + drawnCard);
+        System.out.println(name + "'s hand: " + hand.displayHand());
     }
 }
