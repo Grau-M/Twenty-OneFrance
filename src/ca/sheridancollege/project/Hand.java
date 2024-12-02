@@ -29,6 +29,11 @@ public class Hand {
     public List<Card> getCards() {
         return cards;
     }
+    
+    // Get the number of cards in the hand
+    public int getNumberOfCards() { 
+        return cards.size();
+    }
 
     // Custom method to display the hand without brackets
     public String displayHand() {

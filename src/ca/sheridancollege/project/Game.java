@@ -3,6 +3,7 @@ package ca.sheridancollege.project;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -52,21 +53,29 @@ public class Game {
         while (playAgain) {
 
             // Get player's wager
-            double wager;
+            double wager = 0.0;
 
             do {
                 System.out.print("\nEnter your wager: ");
-                wager = scanner.nextDouble();
+                try {
+                    wager = scanner.nextDouble();
 
-                // Check if the wager is positive
-                if (wager <= 0) {
-                    System.out.println("Wager must be greater than zero");
+                    // Check if the wager is positive
+                    if (wager <= 0) {
+                        System.out.println("Wager must be greater than zero");
 
-                    // Check if the wager is greater than the player's balance
-                } else if (wager > player.getBalance()) {
-                    System.out.println("Insufficient funds. Please enter a wager less than or equal to: $" + df.format(player.getBalance()));
+                        // Check if the wager is greater than the player's balance
+                    } else if (wager > player.getBalance()) {
+                        System.out.println("Insufficient funds. Please enter a wager less than or equal to: $" + df.format(player.getBalance()));
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid Input: Please enter a numerical value.");
+
                 }
             } while (wager <= 0 || wager > player.getBalance());
+            
+            // Add the wager to the game
+            player.placeBet(wager);
 
             // Shuffle the deck before gameplay
             deck.shuffle();
@@ -94,7 +103,7 @@ public class Game {
             int dealerHandValue = dealer.getHand().calculateHandValue();
 
             // Determine the winner and update the player's balance
-            if (playerHandValue > dealerHandValue && playerHandValue <= 21) {
+            if ((playerHandValue > dealerHandValue && playerHandValue <= 21) || (playerHandValue <= 21 && dealerHandValue > 21)) {
                 System.out.println("\nCongradulations! You win!");
                 player.winBet(wager);
             } else if ((dealerHandValue > playerHandValue && dealerHandValue <= 21) || playerHandValue > 21) {
@@ -114,23 +123,28 @@ public class Game {
                 playAgain = false;
                 break; // Exit the loop, game ends
             }
+            
+            // Create a choice integer
+            int choice = 1;
+            
+            while (choice == 1 || choice == 2) {
+                System.out.println("\nWould you like to play again: (1) Yes, (2) No");
+                choice = scanner.nextInt();
 
-            System.out.println("\nWould you like to play again: (1) Yes, (2) No");
-            int choice = scanner.nextInt();
+                if (choice == 1) {
+                    playAgain = true;
+                    // Create new Deck and clear all cards from the last match
+                    deck = new Deck();
+                    deck.shuffle();
+                    player.getHand().clear();
+                    dealer.getHand().clear();
+                } else if (choice == 2) {
+                    playAgain = false;
+                    System.out.println("\nThanks for playing, your payout is: " + df.format(player.getBalance()));
 
-            if (choice == 1) {
-                playAgain = true;
-                // Create new Deck and clear all cards from the last match
-                deck = new Deck();
-                deck.shuffle();
-                player.getHand().clear();
-                dealer.getHand().clear();
-            } else if (choice == 2) {
-                playAgain = false;
-                System.out.println("Thanks for playing, your payout is: " + df.format(player.getBalance()));
-
-            } else {
-                System.out.println("Invalid choice. Please try again");
+                } else {
+                    System.out.println("Invalid choice. Please try again");
+                }
             }
         }
     }

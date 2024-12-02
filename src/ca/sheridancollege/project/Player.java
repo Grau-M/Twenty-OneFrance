@@ -52,11 +52,11 @@ public class Player {
     }
     
     public void winBet(double betAmount) {
-        balance += betAmount; // Add the wager back to the player's balance
+        balance += (2 * betAmount); // Since wager was subtracted from the balance, double the wager and return to the player
     }
 
     public void loseBet(double betAmount) {
-        balance -= betAmount; // Deduct the wager if the player loses
+        // This is empty because the place bet already takes the bet amount, if lost, nothing returns
     }
 
     // Add balance (e.g., after winning)
@@ -73,13 +73,13 @@ public class Player {
         // Use drawCard() to take from the top of the deck
         Card drawnCard = deck.drawCard();
         hand.addCard(drawnCard);
-        System.out.println(name + " hits and draws: " + drawnCard);
+        System.out.println("\n" + name + " hits and draws: " + drawnCard);
         System.out.println(name + "'s hand: " + hand.displayHand());
         
     }
     
     // Stand method 
     public void stand() {
-        System.out.println(name + " stands with a value of: " + hand.calculateHandValue());
+        System.out.println("\n" + name + " stands with a value of: " + hand.calculateHandValue());
     }
 }

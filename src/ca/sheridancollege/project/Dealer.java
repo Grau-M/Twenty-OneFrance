@@ -37,6 +37,9 @@ public class Dealer {
     
     // Stand method
     public void stand() {
-        System.out.println("Dealer stands with the hand: " + hand.displayHand());
+        if (hand.getNumberOfCards() > 2) {
+            System.out.println("Dealer's hand: " + hand.displayHand());
+        }
+        System.out.println("\nDealer stands with a value of: " + hand.calculateHandValue());
     }
 }
