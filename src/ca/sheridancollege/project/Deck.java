@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
+ * @edited Tam Nguyen
  */
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,5 +38,9 @@ public class Deck {
     // Draw a card from the deck
     public Card drawCard() {
         return cards.remove(0); // Remove and return the top card
+    }
+    
+    public Card dealCard() {
+        return cards.remove(cards.size() - 1); // Remove from the end of the deck
     }
 }
