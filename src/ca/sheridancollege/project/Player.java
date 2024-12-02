@@ -36,6 +36,11 @@ public class Player {
     public double getBalance() {
         return balance;
     }
+    
+    // Set the balance
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     // Place a bet
     public void placeBet(double amount) {

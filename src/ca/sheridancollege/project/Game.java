@@ -33,28 +33,53 @@ public class Game {
         // Add a scanner to prompt user input
         Scanner scanner = new Scanner(System.in);
         
+        // Get player's name and buy-in amount
         System.out.print("Enter your name: ");
         String playerName = scanner.nextLine();
-        
-        System.out.print("Enter your wager: ");
-        double wager = scanner.nextDouble();
 
-        player = new Player(playerName, wager);
-        
-        deck.shuffle(); // Shuffle the deck
+        System.out.print("Enter your buy-in amount: ");
+        double buyInAmount = scanner.nextDouble();
 
-        // Deal initial cards
-        player.getHand().addCard(deck.drawCard());
-        player.getHand().addCard(deck.drawCard());
-        dealer.getHand().addCard(deck.drawCard());
-        dealer.getHand().addCard(deck.drawCard());
-
-        // Display the balance of the user to the terminal
-        System.out.println("\n" + player.getName() + " Balance: " + df.format(player.getBalance()) + "\n");
+        player = new Player(playerName, buyInAmount);
         
-        // Display hands
-        System.out.println(player.getName() + " Hand: " + player.getHand().displayHand());
-        System.out.println("Dealer's Hand: " + dealer.getHand().getCards().get(0) + " [Hidden]"); 
+        // Prompt to start the game
+        System.out.println("\nWelcome, " + playerName + "! Your starting balance is: $" + df.format(player.getBalance()));
+        System.out.print("Are you ready to start the game? (yes/no): ");
+        String startGameInput = scanner.next();
+        
+        if (startGameInput.equalsIgnoreCase("yes")) {
+            // Get player's wager
+            System.out.print("\nEnter your wager: ");
+            double wager = scanner.nextDouble();
+
+            // Check if wager is valid
+            if (wager > player.getBalance()) {
+                System.out.println("Insufficient funds. Please enter a valid wager.");
+                return;
+            }
+
+            // Update player's balance
+            player.setBalance(player.getBalance() - wager);
+
+            // Shuffle the deck before gameplay
+            deck.shuffle();
+            
+            // Deal initial cards
+            player.getHand().addCard(deck.drawCard());
+            player.getHand().addCard(deck.drawCard());
+            dealer.getHand().addCard(deck.drawCard());
+            dealer.getHand().addCard(deck.drawCard());
+
+            // Display initial game state
+            System.out.println("\nYour balance: $" + player.getBalance());
+            System.out.println("Your wager: $" + wager + "\n");
+            System.out.println("Your hand: " + player.getHand());
+            System.out.println("Dealer's hand: " + dealer.getHand().getCards().get(0) + " [Hidden]");
+
+            
+        } else {
+            System.out.println("Thank you for playing. Your cashout is: " + player.getBalance() + " Goodbye!");
+        } 
     }
 
     // Main method
