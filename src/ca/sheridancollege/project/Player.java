@@ -58,11 +58,20 @@ public class Player {
     
     // Hit method to draw a card
     public void hit(Deck deck) {
+        if (deck.isEmpty()) {
+            System.out.println("The deck is empty, " + name + " cannot draw a card.");
+            return;
+        }
         // Use drawCard() to take from the top of the deck
         Card drawnCard = deck.drawCard();
         hand.addCard(drawnCard);
         System.out.println(name + " hits and draws: " + drawnCard);
         System.out.println(name + "'s hand: " + hand.displayHand());
         
+    }
+    
+    // Stand method 
+    public void stand() {
+        System.out.println(name + " stands with the hand: " + hand.displayHand());
     }
 }
