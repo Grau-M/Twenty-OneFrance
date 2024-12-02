@@ -44,7 +44,7 @@ public class Game {
 
         double buyInAmount = 0.0;
         boolean validInput = false;
-        
+
         while (!validInput) {
             System.out.print("Enter your buy-in amount: ");
             try {
@@ -58,7 +58,7 @@ public class Game {
                 System.out.println("Invalid input. Please enter a numeric value.");
                 scanner.next();
             }
-            
+
         }
 
         player = new Player(playerName, buyInAmount);
@@ -90,7 +90,7 @@ public class Game {
                     wager = -1;
                 }
             } while (wager <= 0 || wager > player.getBalance());
-            
+
             // Add the wager to the game
             player.placeBet(wager);
 
@@ -140,12 +140,18 @@ public class Game {
                 playAgain = false;
                 break; // Exit the loop, game ends
             }
-            
+
             // Create a choice integer
             int choice = 1;
-            
+
             do {
                 System.out.println("\nWould you like to play again: (1) Yes, (2) No");
+
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter 1 or 2.");
+                    scanner.next();
+                }
+
                 choice = scanner.nextInt();
 
                 if (choice == 1) {
@@ -163,7 +169,7 @@ public class Game {
                     System.out.println("Invalid choice. Please try again");
                     choice = 0;
                 }
-            }while (choice != 1 && choice != 2);
+            } while (choice != 1 && choice != 2);
         }
     }
 
@@ -172,22 +178,33 @@ public class Game {
         while (true) {
             System.out.println("\nYour hand: " + player.getHand().displayHand());
             System.out.println("Hand value: " + player.getHand().calculateHandValue());
-            System.out.println("Choose an action: (1) Hit, (2) Stand");
-            int choice = scanner.nextInt();
 
-            if (choice == 1) {
-                player.hit(deck);
+            int choice = 0;
 
-                if (player.getHand().isBusted()) {
-                    System.out.println("You busted with hand value " + player.getHand().calculateHandValue());
-                    return;
+            do {
+                System.out.println("\nWould you like to hit or stand? (1) Hit, (2) Stand");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter 1 or 2.");
+                    scanner.next(); // Clear the invalid input
                 }
-            } else if (choice == 2) {
-                player.stand();
-                return;
-            } else {
-                System.out.println("Invalid choice. Please try again");
-            }
+
+                choice = scanner.nextInt();
+
+                if (choice == 1) {
+                    player.hit(deck);
+
+                    if (player.getHand().isBusted()) {
+                        System.out.println("You busted with hand value " + player.getHand().calculateHandValue());
+                        return;
+                    }
+                } else if (choice == 2) {
+                    player.stand();
+                    return;
+                } else {
+                    System.out.println("Invalid choice. Please try again.");
+                    choice = 0; // Reset choice to force another iteration
+                }
+            } while (choice != 1 && choice != 2);
         }
     }
 
