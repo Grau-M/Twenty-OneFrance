@@ -28,5 +28,6 @@ public class Dealer {
         hand.addCard(drawnCard);
         System.out.println("Dealer hits and draws: " + drawnCard);
         System.out.println("Dealer's hand: " + hand.displayHand());
+        
     }
 }

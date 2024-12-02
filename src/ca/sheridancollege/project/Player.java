@@ -63,5 +63,6 @@ public class Player {
         hand.addCard(drawnCard);
         System.out.println(name + " hits and draws: " + drawnCard);
         System.out.println(name + "'s hand: " + hand.displayHand());
+        
     }
 }
