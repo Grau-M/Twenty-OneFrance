@@ -48,7 +48,7 @@ public class Hand {
         
         for (Card card : cards) {
             int cardValue = card.getValue();
-            if(cardValue == 1) { // This means the card is an ace
+            if(cardValue == 11) { // This means the card is an ace
                 aceCount++;
                 handValue += 11;                
             } else if (cardValue > 10) { // Face value cards

@@ -51,6 +51,14 @@ public class Player {
             balance -= amount;
         }
     }
+    
+    public void winBet(double betAmount) {
+        balance += betAmount * 2; // Double the bet on a win
+    }
+
+    public void loseBet(double betAmount) {
+        // Balance is already decreased when placing the bet
+    }
 
     // Add balance (e.g., after winning)
     public void addBalance(double amount) {
@@ -73,6 +81,6 @@ public class Player {
     
     // Stand method 
     public void stand() {
-        System.out.println(name + " stands with the hand: " + hand.displayHand());
+        System.out.println(name + " stands with a value of: " + hand.calculateHandValue());
     }
 }
