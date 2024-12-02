@@ -8,19 +8,18 @@ import java.util.Scanner;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author chukwukeshiem
  * @edited Marcus Grau, Tam Nguyen
- * 
+ *
  */
-
 public class Game {
+
     private Deck deck;
     private Player player;
     private Dealer dealer;
-    
+
     // Add a decimal formatter to the string
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -32,12 +31,12 @@ public class Game {
 
     // Start the game
     public void startGame() {
-       
+
         // Add a scanner to prompt user input
         Scanner scanner = new Scanner(System.in);
-        
+
         boolean playAgain = true;
-        
+
         // Get player's name and buy-in amount
         System.out.print("Enter your name: ");
         String playerName = scanner.nextLine();
@@ -46,29 +45,29 @@ public class Game {
         double buyInAmount = scanner.nextDouble();
 
         player = new Player(playerName, buyInAmount);
-        
+
         // Prompt to start the game
         System.out.println("\nWelcome, " + playerName + "! Your starting balance is: $" + df.format(player.getBalance()));
-        
+
         while (playAgain) {
-            
+
             // Get player's wager
             double wager;
 
             do {
                 System.out.print("\nEnter your wager: ");
                 wager = scanner.nextDouble();
-                
+
                 // Check if the wager is positive
                 if (wager <= 0) {
                     System.out.println("Wager must be greater than zero");
-                    
-                // Check if the wager is greater than the player's balance
+
+                    // Check if the wager is greater than the player's balance
                 } else if (wager > player.getBalance()) {
                     System.out.println("Insufficient funds. Please enter a wager less than or equal to: $" + df.format(player.getBalance()));
-                } 
+                }
             } while (wager <= 0 || wager > player.getBalance());
-                    
+
             // Shuffle the deck before gameplay
             deck.shuffle();
 
@@ -106,8 +105,15 @@ public class Game {
                 // Return the bet to the player
                 player.setBalance(player.getBalance() + wager);
             }
-            
+
             System.out.println("\nYour balance: $" + df.format(player.getBalance()));
+
+            // Balance check - If the balance is zero, end the game
+            if (player.getBalance() <= 0) {
+                System.out.println("You don't have enough funds to continue. Game over!");
+                playAgain = false;
+                break; // Exit the loop, game ends
+            }
 
             System.out.println("\nWould you like to play again: (1) Yes, (2) No");
             int choice = scanner.nextInt();
@@ -136,10 +142,10 @@ public class Game {
             System.out.println("Hand value: " + player.getHand().calculateHandValue());
             System.out.println("Choose an action: (1) Hit, (2) Stand");
             int choice = scanner.nextInt();
-            
+
             if (choice == 1) {
                 player.hit(deck);
-                
+
                 if (player.getHand().isBusted()) {
                     System.out.println("You busted with hand value " + player.getHand().calculateHandValue());
                     return;
@@ -152,26 +158,26 @@ public class Game {
             }
         }
     }
-    
+
     // Dealer's turn logic for hit and stand
     private void dealerTurn() {
         System.out.println("\nDealer's turn:\n");
-        
+
         while (dealer.getHand().calculateHandValue() < 17) {
             dealer.hit(deck);
         }
-        
+
         if (dealer.getHand().isBusted()) {
-            System.out.println("Dealer busted with hand value: " + dealer.getHand().calculateHandValue());   
+            System.out.println("Dealer busted with hand value: " + dealer.getHand().calculateHandValue());
         } else {
             dealer.stand();
         }
     }
-    
+
     // Main method
     public static void main(String[] args) {
         Game game = new Game();
         game.startGame();
     }
-    
+
 }
