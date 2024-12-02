@@ -67,6 +67,10 @@ public class Hand {
         return handValue;
     }
     
+    public boolean isBusted() {
+        return calculateHandValue() > 21;
+    }
+    
     @Override
     public String toString() {
         return displayHand(); // Use the custom display method in toString

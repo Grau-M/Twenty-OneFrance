@@ -82,7 +82,7 @@ public class Game {
             System.out.println("Player's hand value: " + playerHandValue);
             System.out.println("Dealer's hand value: " + dealerHandValue);
 
-            
+
         } else {
             System.out.println("Thank you for playing. Your cashout is: " + player.getBalance() + " Goodbye!");
         } 
