@@ -20,26 +20,12 @@ public class Card {
         this.rank = rank;
         this.suit = suit;
         
-        if (rank.equals("2")) {
-            value = 2;
-        } else if (rank.equals("3")) {
-            value = 3;
-        } else if (rank.equals("4")) {
-            value = 4;
-        } else if (rank.equals("5")) {
-            value = 5;
-        } else if (rank.equals("6")) {
-            value = 6;
-        } else if (rank.equals("7")) {
-            value = 7;
-        } else if (rank.equals("8")) {
-            value = 8;
-        } else if (rank.equals("9")) {
-            value = 9;
-        } else if (rank.equals("Ace")){
+        if (rank.equals("Ace")){
             value = 11;
-        } else {
+        } else if (rank.equals("Jack") || rank.equals("Queen") || rank.equals("King")) {
             value = 10;
+        } else {
+            value = Integer.parseInt(rank);
         }
     }
 
