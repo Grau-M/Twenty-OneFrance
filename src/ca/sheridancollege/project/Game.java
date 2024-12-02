@@ -42,8 +42,24 @@ public class Game {
         System.out.print("Enter your name: ");
         String playerName = scanner.nextLine();
 
-        System.out.print("Enter your buy-in amount: ");
-        double buyInAmount = scanner.nextDouble();
+        double buyInAmount = 0.0;
+        boolean validInput = false;
+        
+        while (!validInput) {
+            System.out.print("Enter your buy-in amount: ");
+            try {
+                buyInAmount = scanner.nextDouble();
+                if (buyInAmount > 0) {
+                    validInput = true;
+                } else {
+                    System.out.println("Buy-in amount must be greater than zero. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                scanner.next();
+            }
+            
+        }
 
         player = new Player(playerName, buyInAmount);
 
@@ -70,7 +86,8 @@ public class Game {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid Input: Please enter a numerical value.");
-
+                    scanner.next();
+                    wager = -1;
                 }
             } while (wager <= 0 || wager > player.getBalance());
             
@@ -127,7 +144,7 @@ public class Game {
             // Create a choice integer
             int choice = 1;
             
-            while (choice == 1 || choice == 2) {
+            do {
                 System.out.println("\nWould you like to play again: (1) Yes, (2) No");
                 choice = scanner.nextInt();
 
@@ -144,8 +161,9 @@ public class Game {
 
                 } else {
                     System.out.println("Invalid choice. Please try again");
+                    choice = 0;
                 }
-            }
+            }while (choice != 1 && choice != 2);
         }
     }
 
