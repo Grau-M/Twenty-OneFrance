@@ -82,12 +82,59 @@ public class Game {
             System.out.println("Player's hand value: " + playerHandValue);
             System.out.println("Dealer's hand value: " + dealerHandValue);
 
-
+            // Player's turn
+            playerTurn(scanner);
+            
+            // Dealer's turn if the player hasn't busted
+            if (!player.getHand().isBusted()) {
+                dealerTurn();
+            }
+            
         } else {
             System.out.println("Thank you for playing. Your cashout is: " + player.getBalance() + " Goodbye!");
         } 
     }
 
+    // Player's turn logic for hit and stand
+    private void playerTurn(Scanner scanner) {
+        while (true) {
+            System.out.println("\nYour current hand: " + player.getHand().displayHand());
+            System.out.println("Hand value: " + player.getHand().calculateHandValue());
+            System.out.println("Choose an action: (1) Hit, (2) Stand");
+            int choice = scanner.nextInt();
+            
+            if (choice == 1) {
+                player.hit(deck);
+                
+                if (player.getHand().isBusted()) {
+                    System.out.println("You busted with hand value " + player.getHand().calculateHandValue());
+                    return;
+                }
+            } else if (choice == 2) {
+                player.stand();
+                return;
+            } else {
+                System.out.println("Invalid choice. Please try again");
+            }
+        }
+    }
+    
+    // Dealer's turn logic for hit and stand
+    private void dealerTurn() {
+        System.out.println("\nDealer's turn");
+        System.out.println("Dealer's initial hand: " + dealer.getHand().displayHand());
+        
+        while (dealer.getHand().calculateHandValue() < 17) {
+            dealer.hit(deck);
+        }
+        
+        if (dealer.getHand().isBusted()) {
+            System.out.println("Dealer busted with hand value: " + dealer.getHand().calculateHandValue());   
+        } else {
+            dealer.stand();
+        }
+    }
+    
     // Main method
     public static void main(String[] args) {
         Game game = new Game();
