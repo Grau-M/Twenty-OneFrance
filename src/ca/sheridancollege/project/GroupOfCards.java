@@ -1,55 +1,54 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * A concrete class that represents any grouping of cards for a Game. HINT, you might want to subclass this more than
- * once. The group of cards has a maximum size attribute which is flexible for reuse.
- *
- * @author dancye
- * @author Paul Bonenfant Jan 2020
+ * Represents any grouping of cards for a game.
+ * Can be extended to implement specific card collections like Deck or Hand.
+ * 
+ * @author tamnguyen
  */
 public class GroupOfCards {
-
-    //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
-    private int size;//the size of the grouping
+    private ArrayList<Card> cards; // Initialize as private to enforce encapsulation
+    private int size;
 
     public GroupOfCards(int size) {
         this.size = size;
+        this.cards = new ArrayList<>(); // Initialize the cards list
     }
 
     /**
-     * A method that will get the group of cards as an ArrayList
+     * Get the group of cards.
      *
-     * @return the group of cards.
+     * @return the cards.
      */
     public ArrayList<Card> getCards() {
         return cards;
     }
 
+    /**
+     * Shuffle the group of cards.
+     */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
     /**
-     * @return the size of the group of cards
+     * Get the size of the card group.
+     *
+     * @return size.
      */
     public int getSize() {
         return size;
     }
 
     /**
-     * @param size the max size for the group of cards
+     * Set the size of the card group.
+     *
+     * @param size the new size.
      */
     public void setSize(int size) {
         this.size = size;
     }
-
-}//end class
+}

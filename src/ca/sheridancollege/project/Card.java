@@ -1,48 +1,25 @@
+/**
+ * SYST 17796 Project Base code.
+ * Students can modify and extend to implement their game.
+ * Add your name as an author and the date!
+ */
 package ca.sheridancollege.project;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
+ * A class to be used as the base Card class for the project. Must be general enough to be instantiated for any Card
+ * game. Students wishing to add to the code should remember to add themselves as a modifier.
  *
- * @author chukwukeshiem
- * @edited Marcus Grau
- * @edited Tam Nguyen
+ * @author dancye
  */
-public class Card {
-    private String rank;
-    private String suit;
-    private int value;
+public abstract class Card {
+    //default modifier for child classes
 
-    public Card(String rank, String suit) {
-        this.rank = rank;
-        this.suit = suit;
-        
-        if (rank.equals("Ace")){
-            value = 11;
-        } else if (rank.equals("Jack") || rank.equals("Queen") || rank.equals("King")) {
-            value = 10;
-        } else {
-            value = Integer.parseInt(rank);
-        }
-    }
-
-    public String getRank() {
-        return rank;
-    }
-
-    public String getSuit() {
-        return suit;
-    }
-    
-    public int getValue() {
-        return value;
-    }
-
+    /**
+     * Students should implement this method for their specific children classes
+     *
+     * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
+     */
     @Override
-    public String toString() {
-        return rank + " of " + suit; // Format the card as "Rank of Suit"
-    }
+    public abstract String toString();
+
 }

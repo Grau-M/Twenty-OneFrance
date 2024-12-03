@@ -1,46 +1,38 @@
-package ca.sheridancollege.project;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package ca.sheridancollege.project;
 
 /**
  *
  * @author chukwukeshiem
  * @edited Marcus Grau
  */
-import java.util.ArrayList;
-import java.util.List;
-
-public class Hand {
-    private List<Card> cards;
+public class Hand extends GroupOfCards {
+    
 
     public Hand() {
-        cards = new ArrayList<>();
+        super(10);
     }
 
     // Add a card to the hand
     public void addCard(Card card) {
-        cards.add(card);
+        getCards().add(card);
     }
 
-    // Get the list of cards in the hand
-    public List<Card> getCards() {
-        return cards;
-    }
     
     // Get the number of cards in the hand
     public int getNumberOfCards() { 
-        return cards.size();
+        return getCards().size();
     }
 
     // Custom method to display the hand without brackets
     public String displayHand() {
         StringBuilder handString = new StringBuilder();
-        for (int i = 0; i < cards.size(); i++) {
-            handString.append(cards.get(i)); // Append card
-            if (i < cards.size() - 1) {
+        for (int i = 0; i < getCards().size(); i++) {
+            handString.append(getCards().get(i)); // Append card
+            if (i < getCards().size() - 1) {
                 handString.append(", "); // Add a comma between cards
             }
         }
@@ -51,8 +43,9 @@ public class Hand {
         int handValue = 0;
         int aceCount = 0;
         
-        for (Card card : cards) {
-            int cardValue = card.getValue();
+        for (Card card : getCards()) {
+            BlackJackCard blackjackCard = (BlackJackCard) card;
+            int cardValue = blackjackCard.getValue();
             if(cardValue == 11) { // This means the card is an ace
                 aceCount++;
                 handValue += 11;                
@@ -77,7 +70,7 @@ public class Hand {
     }
     
     public void clear() {
-        cards.clear(); // Clear the list of cards in the hand
+        getCards().clear(); // Clear the list of cards in the hand
     }
     
     @Override

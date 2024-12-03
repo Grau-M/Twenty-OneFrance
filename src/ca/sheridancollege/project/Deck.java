@@ -1,52 +1,43 @@
 package ca.sheridancollege.project;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+import java.util.Collections;
 
 /**
- *
+ * Represents a deck of cards for the Blackjack game.
+ * Extends GroupOfCards to inherit common functionality.
  * @author chukwukeshiem
  * @edited Marcus Grau
  * @edited Tam Nguyen
  */
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class Deck {
-    private List<Card> cards;
+public class Deck extends GroupOfCards {
 
     public Deck() {
-        cards = new ArrayList<>();
+        super(52); // Set the maximum size to 52 cards
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 
         // Generate the deck (52 cards)
         for (String suit : suits) {
             for (String rank : ranks) {
-                cards.add(new Card(rank, suit));
+                getCards().add(new BlackJackCard(rank, suit)); // Safely add to the initialized list
             }
         }
     }
 
-    // Shuffle the deck
+    @Override
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(getCards());
     }
 
-    // Draw a card from the deck
     public Card drawCard() {
-        return cards.remove(0); // Remove and return the top card
+        return getCards().remove(0); // Remove and return the top card
     }
-    
+
     public Card dealCard() {
-        return cards.remove(cards.size() - 1); // Remove from the end of the deck
+        return getCards().remove(getCards().size() - 1); // Remove and return the bottom card
     }
-    
-    // Error handling when the deck is empty
+
     public boolean isEmpty() {
-        return cards.isEmpty();
+        return getCards().isEmpty();
     }
 }

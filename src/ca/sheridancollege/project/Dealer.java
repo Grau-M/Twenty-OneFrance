@@ -8,7 +8,7 @@ package ca.sheridancollege.project;
 /**
  *
  * @author chukwukeshiem
- * @edited Tam Nguyen
+ * @edited Tam Nguyen, Marcus Grau
  */
 public class Dealer {
     private Hand hand;
