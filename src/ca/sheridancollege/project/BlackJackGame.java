@@ -44,7 +44,11 @@ public class BlackJackGame extends Game {
             playAgain = promptPlayAgain(scanner);
         } while (playAgain);
 
-        System.out.println("\nThanks for playing, " + playerName + "! Your final balance is: $" + df.format(player.getBalance()));
+        if (player.getBalance() == 0) {
+            System.out.println("\nYou have run out of cash! Please come and play again.");
+        } else {
+            System.out.println("\nThanks for playing, " + playerName + "! Your final balance is: $" + df.format(player.getBalance()));
+        }
     }
 
     @Override
@@ -209,6 +213,9 @@ public class BlackJackGame extends Game {
             choice = scanner.nextInt();
 
             if (choice == 1) {
+                if (player.getBalance() == 0){
+                    return false;
+                }
                 return true;
             } else if (choice == 2) {
                 return false;
