@@ -13,6 +13,7 @@ public class BlackJackPlayer extends Player {
     private double balance;
     private Hand hand;
 
+    
     // Constructor
     public BlackJackPlayer(String name, double balance) {
         super(name);
